@@ -1,10 +1,7 @@
-# watsapp_app
+Trabalho para a disciplina de Programação Para Dispositivos Móveis
+Alunas: Stela Marisco, Clara Sanabria e Letizia Pereira
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
+WhatsApp usando Flutter
 
 A few resources to get you started if this is your first Flutter project:
 
