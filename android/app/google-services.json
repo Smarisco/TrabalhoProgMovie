@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103672890469",
+    "project_id": "projetowatsapp",
+    "storage_bucket": "projetowatsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103672890469:android:18d34089ae49130777f28c",
+        "android_client_info": {
+          "package_name": "com.example.watsapp_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103672890469-qvp7p2rb8nv7e14oiujpr0mqfqd89kel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8zJH14Nd2sy0fOdlb8eZ_y9kfmWSw1lI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103672890469-qvp7p2rb8nv7e14oiujpr0mqfqd89kel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
