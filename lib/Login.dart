@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:watsapp_app/Usuario.dart';
-
+import 'package:watsapp_app/model/Usuario.dart';
 import 'Cadastro.dart';
 import 'Home.dart';
+import 'RouteGenerator.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -66,8 +67,32 @@ class _LoginState extends State<Login> {
     });
   }
 
+
+  Future _verificarUsuarioLogado() async{
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.signOut();
+
+    FirebaseUser usuarioLogado = await auth.currentUser();
+
+    if( usuarioLogado != null ){
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Home()
+          )
+      );
+    }
+
+  }
+
   @override
-  Widget build(BuildContext context) {
+  void initState(){
+    _verificarUsuarioLogado();
+    super.initState();
+  }
+
+  @override
+    Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(color: Color(0xff075E54)),
@@ -157,3 +182,5 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
+
