@@ -19,68 +19,72 @@ class _LoginState extends State<Login> {
   TextEditingController(text: "123456");
   String _mensagemerro = "";
 
-  _validarCampos() {
-    //Recupera dados dos Campos
+  _validarCampos(){
 
+    //Recupera dados dos campos
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
 
+    if( email.isNotEmpty && email.contains("@") ){
 
-    if (email.isNotEmpty && email.contains("@")) {
-      if (senha.isNotEmpty) {
+      if( senha.isNotEmpty ){
+
         setState(() {
-          _mensagemerro = " ";
+          _mensagemerro = "";
         });
-        Usuario usuario = Usuario();
 
+        Usuario usuario = Usuario();
         usuario.email = email;
         usuario.senha = senha;
 
-        _logarUsuario(usuario);
+        _logarUsuario( usuario );
 
-      } else {
+
+      }else{
         setState(() {
           _mensagemerro = "Preencha a senha!";
         });
       }
-    } else {
+
+    }else{
       setState(() {
-        _mensagemerro = "Preencha o email utilizando @";
+        _mensagemerro = "Preencha o E-mail utilizando @";
       });
     }
+
   }
 
-  _logarUsuario(Usuario usuario){
+  _logarUsuario( Usuario usuario ){
+
     FirebaseAuth auth = FirebaseAuth.instance;
+
     auth.signInWithEmailAndPassword(
         email: usuario.email,
         password: usuario.senha
     ).then((firebaseUser){
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Home()
-          )
-      );
+
+      Navigator.pushReplacementNamed(context, "/home");
+
     }).catchError((error){
-      _mensagemerro = "Erro ao autenticar usuário, verique e-mail e senha e tente logar novamente!";
+
+      setState(() {
+        _mensagemerro = "Erro ao autenticar usuário, verifique e-mail e senha e tente novamente!";
+      });
+
     });
+
   }
 
 
-  Future _verificarUsuarioLogado() async{
+  Future _verificarUsuarioLogado() async {
+
     FirebaseAuth auth = FirebaseAuth.instance;
-    auth.signOut();
+    //auth.signOut();
 
     FirebaseUser usuarioLogado = await auth.currentUser();
 
     if( usuarioLogado != null ){
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Home()
-          )
-      );
+      Navigator.pushReplacementNamed(context, "/home");
     }
 
   }
@@ -92,7 +96,7 @@ class _LoginState extends State<Login> {
   }
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(color: Color(0xff075E54)),
@@ -104,80 +108,91 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(bottom: 32),
-                  child:
-                      Image.asset("imagens/logo.png", width: 200, height: 150),
+                  child: Image.asset(
+                    "imagens/logo.png",
+                    width: 200,
+                    height: 150,
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 12),
+                  padding: EdgeInsets.only(bottom: 8),
                   child: TextField(
-                    controller:_controllerEmail,
-                      autofocus: true,
-                      keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(fontSize: 20),
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          hintText: "E-mail",
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(32)))),
-                ),
-                TextField(
-                  controller: _controllerSenha,
-                    keyboardType: TextInputType.text,
+                    controller: _controllerEmail,
+                    autofocus: true,
+                    keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "Senha",
+                        hintText: "E-mail",
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32)))),
+                            borderRadius: BorderRadius.circular(32))),
+                  ),
+                ),
+                TextField(
+                  controller: _controllerSenha,
+                  obscureText: true,
+                  keyboardType: TextInputType.text,
+                  style: TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                      hintText: "Senha",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32))),
+                ),
                 Padding(
-                  padding: EdgeInsets.only(top: 16, bottom: 12),
+                  padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
-                      child: Text("Entrar",
-                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                      child: Text(
+                        "Entrar",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
                       color: Colors.green,
                       padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(32)
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        _validarCampos();
+                      }),
                 ),
                 Center(
                   child: GestureDetector(
                     child: Text(
-                      "Não tem conta? Cadastre-se",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context)=>Cadastro()
+                        "Não tem conta? cadastre-se!",
+                        style: TextStyle(
+                            color: Colors.white
                         )
+                    ),
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Cadastro()
+                          )
                       );
                     },
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top:16),
+                  padding: EdgeInsets.only(top: 16),
                   child: Center(
                     child: Text(
                       _mensagemerro,
                       style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 20,
+                          color: Colors.red,
+                          fontSize: 20
                       ),
                     ),
-                  )
+                  ),
                 )
               ],
             ),
           ),
         ),
-
       ),
     );
   }

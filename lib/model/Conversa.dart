@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class Conversa {
 
   String _idRemetente;
@@ -13,17 +14,7 @@ class Conversa {
   Conversa();
 
   salvar() async {
-    /*
 
-    + conversas
-      + jamilton
-          + ultima_conversa
-            + jose
-              idRe
-              idDes
-              ...
-
-    */
     Firestore db = Firestore.instance;
     await db.collection("conversas")
             .document( this.idRemetente )

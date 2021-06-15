@@ -7,7 +7,6 @@ class Mensagem {
 
   //Define o tipo da mensagem, que pode ser "texto" ou "imagem"
   String _tipo;
-
   String _data;
 
   Mensagem();

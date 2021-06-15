@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whastapp/model/Conversa.dart';
-import 'package:whastapp/model/Usuario.dart';
+import 'package:watsapp_app/model/Conversa.dart';
+import 'package:watsapp_app/model/Usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
