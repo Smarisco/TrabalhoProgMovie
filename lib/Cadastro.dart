@@ -15,7 +15,7 @@ class _CadastroState extends State<Cadastro> {
   TextEditingController _controllerEmail =
       TextEditingController(text: "smarisco@gmail.com");
   TextEditingController _controllerSenha =
-      TextEditingController(text: "123456");
+      TextEditingController(text: "111111");
   String _mensagemerro = "";
 
   _validarCampos() {
@@ -60,9 +60,14 @@ class _CadastroState extends State<Cadastro> {
             email: usuario.email, password: usuario.senha)
         .then((firebaseUser) {
       Firestore db = Firestore.instance;
-      db.collection("usuarios").document(firebaseUser.user.uid).setData(usuario.toMap());
 
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+      db
+          .collection("usuarios")
+          .document(firebaseUser.user.uid)
+          .setData(usuario.toMap());
+
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Home()));
     }).catchError((error) {
       print("erro app: " + error.toString());
       setState(() {

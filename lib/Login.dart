@@ -16,7 +16,7 @@ class _LoginState extends State<Login> {
   TextEditingController _controllerEmail =
   TextEditingController(text: "smarisco@gmail.com");
   TextEditingController _controllerSenha =
-  TextEditingController(text: "123456");
+  TextEditingController(text: "111111");
   String _mensagemerro = "";
 
   _validarCampos(){

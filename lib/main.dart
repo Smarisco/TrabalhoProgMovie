@@ -23,9 +23,13 @@ void main(){
       accentColor: Color (0xff25D366)
 
     ),
+    //Recurso rotas avançadas
+    initialRoute:"/",
+    onGenerateRoute: RouteGenerator.generateRoute,
 
-    debugShowCheckedModeBanner: false,
+  debugShowCheckedModeBanner: false,
   ));
+  }
 
-}
+
 

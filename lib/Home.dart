@@ -57,7 +57,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     FirebaseAuth auth = FirebaseAuth.instance;
     await auth.signOut();
 
-    Navigator.pushReplacementNamed(context, "/login");
+    Navigator.pushReplacementNamed(context, "/home");
   }
 
   @override
@@ -94,7 +94,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: <Widget>[
             AbaConversas(),
             AbaContatos()
-      ]),
+      ]
+      ),
     );
   }
 }
